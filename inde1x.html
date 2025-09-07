@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Camera Stream</title>
+    <script src="https://cdn.jsdelivr.net/npm/jsmpeg@0.2.1/jsmpeg.min.js"></script>
+  </head>
+  <body>
+    <h2>Live Camera</h2>
+    <canvas id="video-canvas" width="640" height="480"></canvas>
+
+    <script>
+      let url = "ws://127.0.0.1:9999";
+      let canvas = document.getElementById("video-canvas");
+      new JSMpeg.Player(url, { canvas: canvas });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>JSMpeg Stream Client</title>
+	<style type="text/css">
+		html,
+		body {
+			/* background-color: #111; */
+			text-align: center;
+		}
+
+		button {
+			padding: 20px 40px;
+			font-size: 20px;
+			margin: 10px;
+			border: none;
+			background: #28a745;
+			cursor: pointer;
+		}
+	</style>
+
+</head>
+
+<body>
+	<canvas id="video-canvas"></canvas>
+	<h2>Camera PTZ Control</h2>
+	<div> <button onclick="sendCmd('up')">↑ Up</button><br> <button onclick="sendCmd('left')">← Left</button> <button
+			onclick="sendCmd('right')">Right →</button><br> <button onclick="sendCmd('down')">↓ Down</button><br> <button
+			onclick="sendCmd('zoom_in')">Zoom +</button> <button onclick="sendCmd('zoom_out')">Zoom -</button> </div>
+	<script type="text/javascript" src="jsmpeg.min.js"></script>
+	<script type="text/javascript">
+		var canvas = document.getElementById('video-canvas');
+		var url = 'ws://' + document.location.hostname + ':9999/';
+		var player = new JSMpeg.Player(url, { canvas: canvas });
+	</script>
+
+	<script> function sendCmd(action) { let xhr = new XMLHttpRequest(); xhr.open("POST", "./control.php", true); xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); xhr.onreadystatechange = function () { if (xhr.readyState === 4 && xhr.status === 200) { console.log(xhr.responseText); } }; xhr.send("cmd=" + action); } </script>
+</body>
+
+</html>
