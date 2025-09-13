@@ -1,0 +1,10 @@
+//run Websocket
+
+node ws-relay.js
+
+
+//run ffmpeg server
+
+ffmpeg -i "rtsp://admin:password@192.168.1.4:554/Streaming/Channels/101" -f mpegts -codec:v mpeg1video -s 640x480 -b:v 800k -r 30 http://127.0.0.1:8082/stream
+
+
